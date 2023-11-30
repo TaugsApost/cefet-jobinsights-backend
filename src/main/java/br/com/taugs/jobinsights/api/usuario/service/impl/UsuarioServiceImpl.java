@@ -102,7 +102,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario editar(Usuario entity) {
 		validarEmailDuplicado(entity);
-		entity.setSenha(passwordEncoder.encode(entity.getPassword()));
+		Optional<Usuario> userTempOP = this.repository.findById(entity.getId());
+		if (userTempOP.isPresent()) {
+			if (!userTempOP.get().getSenha().equals(entity.getSenha())) {
+				entity.setSenha(passwordEncoder.encode(entity.getPassword()));
+			}
+		}
+
 		return this.repository.save(entity);
 	}
 
