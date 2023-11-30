@@ -47,11 +47,11 @@ public class UsuarioController {
 	@PostMapping(value = RestMapping.SALVAR + "/aluno")
 	public ResponseEntity<Usuario> salvarAluno(@RequestBody Aluno entity) throws Exception {
 		entity.setRole(RolesEnum.ALUNO_ROLE);
-		if (entity.getIdCurso() == -1) {
+		if (entity.getIdCurso() != null && entity.getIdCurso() == -1) {
 			Curso curso = this.cursoService.salvar(entity.getCurso());
 			entity.setIdCurso(curso.getId());
 		}
-		if (entity.getIdCargo() == -1) {
+		if (entity.getIdCargo() != null && entity.getIdCargo() == -1) {
 			Cargo cargo = this.cargoService.salvar(entity.getCargo());
 			entity.setIdCargo(cargo.getId());
 		}
@@ -61,7 +61,7 @@ public class UsuarioController {
 	@PostMapping(value = RestMapping.SALVAR + "/empresa")
 	public ResponseEntity<Usuario> salvarEmpresa(@RequestBody Empresa entity) throws Exception {
 		entity.setRole(RolesEnum.EMPRESA_ROLE);
-		if (entity.getIdSetor() == -1) {
+		if (entity.getIdSetor() != null && entity.getIdSetor() == -1) {
 			Setor setor = this.setorService.salvar(entity.getSetor());
 			entity.setIdSetor(setor.getId());
 		}
@@ -70,7 +70,7 @@ public class UsuarioController {
 
 	@PostMapping(value = RestMapping.EDITAR + "/empresa")
 	public ResponseEntity<Usuario> editarEmpresa(@RequestBody Empresa entity) throws Exception {
-		if (entity.getIdSetor() == -1) {
+		if (entity.getIdSetor() != null && entity.getIdSetor() == -1) {
 			Setor setor = this.setorService.salvar(entity.getSetor());
 			entity.setIdSetor(setor.getId());
 		}
@@ -79,11 +79,11 @@ public class UsuarioController {
 
 	@PostMapping(value = RestMapping.EDITAR + "/aluno")
 	public ResponseEntity<Usuario> editarAluno(@RequestBody Aluno entity) throws Exception {
-		if (entity.getIdCurso() == -1) {
+		if (entity.getIdCurso() != null && entity.getIdCurso() == -1) {
 			Curso curso = this.cursoService.salvar(entity.getCurso());
 			entity.setIdCurso(curso.getId());
 		}
-		if (entity.getIdCargo() == -1) {
+		if (entity.getIdCargo() != null && entity.getIdCargo() == -1) {
 			Cargo cargo = this.cargoService.salvar(entity.getCargo());
 			entity.setIdCargo(cargo.getId());
 		}

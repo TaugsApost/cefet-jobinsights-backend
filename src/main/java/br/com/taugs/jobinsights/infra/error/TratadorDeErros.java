@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.taugs.jobinsights.exceptions.EmailDuplicateException;
 import br.com.taugs.jobinsights.exceptions.InvalidEmailException;
+import br.com.taugs.jobinsights.exceptions.LoginDuplicateException;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
@@ -64,6 +65,11 @@ public class TratadorDeErros {
 	@ExceptionHandler(InvalidEmailException.class)
 	public ResponseEntity<String> tratarEmailInvalido() {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Epenas emails com o domínio @aluno.cefetmg.br podem ser cadastrados");
+	}
+
+	@ExceptionHandler(LoginDuplicateException.class)
+	public ResponseEntity<String> tratarLoginDuplicado() {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Este login ja esta sendo utilizado por outro usuario");
 	}
 
 	private record DadosErroValidacao(String campo, String mensagem) {
