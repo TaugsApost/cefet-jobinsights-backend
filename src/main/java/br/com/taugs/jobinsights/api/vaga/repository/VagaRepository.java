@@ -24,7 +24,7 @@ public interface VagaRepository extends JpaRepository<Vaga, Long> {
 	        + "vaga.tipoVaga as tipoVaga " //
 	        + "FROM Vaga vaga " //
 	        + "JOIN vaga.empresa empresa " //
-	        + "JOIN empresa.avaliacoes avaliacao " //
+	        + "LEFT JOIN empresa.avaliacoes avaliacao " //
 	        + "JOIN vaga.cargo cargo " //
 	        + "WHERE 1 = 1 " //
 	        + "AND (UPPER(TRANSLATE(COALESCE(cargo.nome,''),'áãàâäçéèëêùûüúóôöïîíÁÀÂÄÃÇÉÈËÊÙÛÜÚÓÔÖÏÎÍ','aaaaaceeeeuuuuoooiiiAAAAACEEEEUUUUOOOIII')) LIKE :#{#filter.cargo}) " //
@@ -46,7 +46,7 @@ public interface VagaRepository extends JpaRepository<Vaga, Long> {
 	        + "vaga.tipoVaga as tipoVaga " //
 	        + "FROM Vaga vaga " //
 	        + "JOIN vaga.empresa empresa " //
-	        + "JOIN empresa.avaliacoes avaliacao " //
+	        + "LEFT JOIN empresa.avaliacoes avaliacao " //
 	        + "JOIN vaga.cargo cargo " //
 	        + "WHERE 1 = 1 " //
 	        + "AND (UPPER(TRANSLATE(COALESCE(cargo.nome,''),'áãàâäçéèëêùûüúóôöïîíÁÀÂÄÃÇÉÈËÊÙÛÜÚÓÔÖÏÎÍ','aaaaaceeeeuuuuoooiiiAAAAACEEEEUUUUOOOIII')) LIKE :#{#filter.cargo}) " //

@@ -77,4 +77,17 @@ public class UsuarioController {
 		return ResponseEntity.ok(service.editar(entity));
 	}
 
+	@PostMapping(value = RestMapping.EDITAR + "/aluno")
+	public ResponseEntity<Usuario> editarAluno(@RequestBody Aluno entity) throws Exception {
+		if (entity.getIdCurso() == -1) {
+			Curso curso = this.cursoService.salvar(entity.getCurso());
+			entity.setIdCurso(curso.getId());
+		}
+		if (entity.getIdCargo() == -1) {
+			Cargo cargo = this.cargoService.salvar(entity.getCargo());
+			entity.setIdCargo(cargo.getId());
+		}
+		return ResponseEntity.ok(service.editar(entity));
+	}
+
 }
